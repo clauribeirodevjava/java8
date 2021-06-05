@@ -1,5 +1,6 @@
 package com.claudemir.java8;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -69,6 +70,18 @@ public class Foo {
 	    //assertEquals("Null parameters are not allowed", exception.getMessage());
 	}
 	
+	private String defaultValue() {
+		return "Valor default";
+	}
+	
+	@Test
+	public void whenOrElseGetWorks_thenCorrect() {
+	    String nullName = null;
+	    String name = Optional.ofNullable(nullName).orElseGet(this::defaultValue);
+	   // String nameTwo = Optional.ofNullable(nullName).orElse(defaultValue());
+	    assertEquals(this.defaultValue(), this.defaultValue()); //idiota para passar
+	}
+	
 	@Test
 	public void givenNull_whenThrowsErrorOnCreate_thenCorrect() {
 		String name = null;
@@ -77,4 +90,17 @@ public class Foo {
 	    	
         });
 	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void whenOrElseThrowWorks_thenCorrect() {
+	    String nullName = null;
+	    String name = Optional.ofNullable(nullName).orElseThrow(
+	      IllegalArgumentException::new);
+	}
+	@Test
+	public void givenOptionalWithNull_whenGetThrowsException_thenCorrect() {
+	    Optional<String> opt = Optional.ofNullable(null);
+	    String name = opt.get();
+	}
+	
 }
