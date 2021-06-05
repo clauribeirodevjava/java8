@@ -2,22 +2,19 @@ package com.claudemir.revisao.enumeration;
 
 public class RevisaoEnum {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException {
 		escolherOpcao(OpcoesMenu.SALVAR);
 		MarcasEnum hp = MarcasEnum.HP;
 		MarcasEnum samsung = MarcasEnum.SAMSUNG;
 		System.out.println("Nome da Marca = "+hp.ordinal()); //ordinal Enum começa em zero
 		System.out.println("Nome da Marca = "+samsung.ordinal());
+		Class cStringArray = Class.forName("[[Ljava.lang.String;");
 		
 		//percorrer todos os enuns.
 		
 		for(OpcoesMenu op : OpcoesMenu.values()) {
 			System.out.println("Menu "+ op + " = " + op.getValor());
 		}
-		
-		
-		
-		
 	}
 	
 	public static void escolherOpcao(OpcoesMenu menu) {
